@@ -1,3 +1,1 @@
-import { createMockedMessage } from "./discord-mocks";
-
-export const createMockMessage = createMockedMessage;
+export { default as createMockedMessage } from "./createMockedMessage";

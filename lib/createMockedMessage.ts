@@ -2,7 +2,7 @@ import { Client, DMChannel, Guild, GuildMember, Message, NewsChannel, TextChanne
 
 jest.mock("discord.js");
 
-export function createMockedMessage(options?: { client?: Client, data?: any, guild?: Guild, channel?: TextChannel | DMChannel | NewsChannel, author?: User, member?: GuildMember }): Message {
+export default function createMockedMessage(options?: { client?: Client, data?: any, guild?: Guild, channel?: TextChannel | DMChannel | NewsChannel, author?: User, member?: GuildMember }): Message {
     const mockedClient = options && options.client !== undefined ? options.client : new Client();
     const mockedGuild = options && options.guild !== undefined ? options.guild : new Guild(mockedClient, {});
     const mockedChannel = options && options.channel !== undefined ? options.channel : new TextChannel(mockedGuild);

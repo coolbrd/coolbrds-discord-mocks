@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createMockMessage = void 0;
-var discord_mocks_1 = require("./discord-mocks");
-exports.createMockMessage = discord_mocks_1.createMockedMessage;
+exports.createMockedMessage = void 0;
+var createMockedMessage_1 = require("./createMockedMessage");
+Object.defineProperty(exports, "createMockedMessage", { enumerable: true, get: function () { return createMockedMessage_1.default; } });

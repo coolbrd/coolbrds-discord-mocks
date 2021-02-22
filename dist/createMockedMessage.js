@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createMockedMessage = void 0;
 var discord_js_1 = require("discord.js");
 jest.mock("discord.js");
 function createMockedMessage(options) {
@@ -17,4 +16,4 @@ function createMockedMessage(options) {
     mockedMessage.member = mockedMember;
     return mockedMessage;
 }
-exports.createMockedMessage = createMockedMessage;
+exports.default = createMockedMessage;
