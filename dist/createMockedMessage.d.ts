@@ -2,8 +2,8 @@ import { Client, DMChannel, Guild, GuildMember, Message, NewsChannel, TextChanne
 export default function createMockedMessage(options?: {
     client?: Client;
     data?: any;
-    guild?: Guild;
+    guild?: Guild | null;
     channel?: TextChannel | DMChannel | NewsChannel;
     author?: User;
-    member?: GuildMember;
+    member?: GuildMember | null;
 }): Message;

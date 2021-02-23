@@ -2,12 +2,56 @@ import { Client, DMChannel, Guild, GuildMember, Message, NewsChannel, TextChanne
 
 jest.mock("discord.js");
 
-export default function createMockedMessage(options?: { client?: Client, data?: any, guild?: Guild, channel?: TextChannel | DMChannel | NewsChannel, author?: User, member?: GuildMember }): Message {
-    const mockedClient = options && options.client !== undefined ? options.client : new Client();
-    const mockedGuild = options && options.guild !== undefined ? options.guild : new Guild(mockedClient, {});
-    const mockedChannel = options && options.channel !== undefined ? options.channel : new TextChannel(mockedGuild);
-    const mockedUser = options && options.author !== undefined ? options.author : new User(mockedClient, {});
-    const mockedMember = options && options.member !== undefined ? options.member : new GuildMember(mockedClient, {}, mockedGuild);
+export default function createMockedMessage(options?: { client?: Client, data?: any, guild?: Guild | null, channel?: TextChannel | DMChannel | NewsChannel, author?: User, member?: GuildMember | null }): Message {
+    let mockedClient: Client;
+    if (options && options.client) {
+        mockedClient = options.client;
+    }
+    else {
+        mockedClient = new Client();
+    }
+
+    let mockedGuild: Guild | null;
+    if (options && options.guild !== undefined) {
+        mockedGuild = options.guild;
+    }
+    else {
+        mockedGuild = new Guild(mockedClient, {});
+    }
+
+    let mockedChannel: TextChannel | DMChannel | NewsChannel;
+    if (options && options.channel) {
+        mockedChannel = options.channel;
+    }
+    else {
+        if (mockedGuild) {
+            mockedChannel = new TextChannel(mockedGuild);
+        }
+        else {
+            mockedChannel = new DMChannel(mockedClient);
+        }
+    }
+
+    let mockedUser: User;
+    if (options && options.author) {
+        mockedUser = options.author;
+    }
+    else {
+        mockedUser = new User(mockedClient, {});
+    }
+
+    let mockedMember: GuildMember | null;
+    if (options && options.member !== undefined) {
+        mockedMember = options.member;
+    }
+    else {
+        if (mockedGuild) {
+            mockedMember = new GuildMember(mockedClient, {}, mockedGuild);
+        }
+        else {
+            mockedMember = null;
+        }
+    }
 
     const mockedMessage = new Message(mockedClient, {}, mockedChannel);
     (mockedMessage as any).client = mockedClient;
